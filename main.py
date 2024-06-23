@@ -6,7 +6,9 @@ from livro import Livro
 from membro import Membro
 
 while True:
-    print('''____________________________________\n
+
+    print('''
+____________________________________\n
        Sistema bibliotecário
 ____________________________________\n
           Menu Principal
@@ -19,25 +21,18 @@ ____________________________________\n
 ____________________________________\n''')
     
     try:
-        opcao = int(input('O que deseja?'))
+        opcao = int(input('O que deseja? '))
 
         match opcao:
             case 1:
                 Membro.adicionar_membro()
-                os.system('cls')
-                pass
             case 2:
                 Livro.adicionar_livro()
-                os.system('cls')
-                pass
             case 3:
-                os.system('cls')
-                pass
+                Membro.emprestar_livro()
             case 4:
-                os.system('cls')
-                pass
+                Membro.devolver_livro()
             case 5:
-                os.system('cls')
                 print('Encerrando...')
                 quit()
             case _:
