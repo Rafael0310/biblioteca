@@ -28,16 +28,16 @@ __________________________________________\n
             # Registro das informações do livro
             else:
                 isbn = len(lista_livros) + 1
-                autor = input('Informe o nome do autor do livro:\n')
+                autor = input('\nInforme o nome do autor do livro:\n')
                 livros_disponiveis.append(isbn)
                 lista_livros.append(Livro(isbn=isbn, titulo=titulo, autor=autor))
                 print(f'''
 __________________________________________\n
       Livro adicionado com sucesso!
 __________________________________________\n
-             ISBN: {isbn}
-             Título: {titulo}
-             Autor: {autor}''')
+        ISBN: {isbn}
+        Título: {titulo}
+        Autor: {autor}''')
 
             if not continuar('registrando livros'):
                 break

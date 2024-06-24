@@ -26,18 +26,23 @@ class Membro:
 
         while True:
             try:
-                id_membro = input('Informe o ID do membro:\n')
+                id_membro = int(input('Informe o ID do membro:\n'))
                 # Verifica se o membro já está na listra, caso positivo, informa ao usuário, caso negativo, solicita os dados do novo membro
                 if any(membro.id_membro == id_membro for membro in lista_membros):
                     print('''
-    __________________________________________\n
-        Esse membro já foi registrado!''')
+__________________________________________\n
+     Esse membro já foi registrado!''')
         
                 # Registro dos dados do usuário
                 else:
-                    nome = input('Informe o nome do membro:\n')
+                    nome = input('\nInforme o nome do membro:\n')
                     lista_membros.append(Membro(id_membro=id_membro, nome=nome))
-                    print(f'Membro adicionado com sucesso!\nID: {id_membro}\nNome: {nome}')
+                    print(f'''
+__________________________________________\n
+      Membro adicionado com sucesso!
+__________________________________________
+        ID: {id_membro}
+        Nome: {nome}''')
 
             except ValueError:
                 print('Por favor, insira um número inteiro')
@@ -51,66 +56,116 @@ class Membro:
     @staticmethod
     # Função para emprestar livro
     def emprestar_livro():
-        while True:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            
-            try:    
-                id_membro = int(input('Informe o ID do membro qual está emprestando o livro:\n'))
-                # Verifica se o ID digitado existe na lista do objeto Membro 
-                if any(membro.id_membro == id_membro for membro in lista_membros):
-                    isbn_livro = int(input('Qual o ISBN do livro que será emprestado?\n'))
-                    # Verifica se o ISBN digitado exista na lista do objeto Livro
-                    if any(livro.isbn == isbn_livro for livro in lista_livros):
-                        # Verifica se o livro está disponível ou não
-                        if any(livro == isbn_livro for livro in livros_disponiveis):
-                            livros_disponiveis.remove(isbn_livro)
-                            print('Livro disponível para empréstimo! Solicite devolução em até 5 dias úteis.')
-                        else:
-                            livros_emprestados.append(isbn_livro)
-                            print('Livro não está disponível para empréstimo! Solicite que retorne outro dia.')
-                            
-                    else:
-                        print('O ISBN do livro não foi localizado no sistema.')
-                else:
-                    print('O ID do membro não foi localizado no sistema.')
-                    
-            except ValueError:
-                print('Por favor, insira um número inteiro.')
-            except:
-                print('Erro inesperado.')
-
-            finally:
-                if not continuar('emprestando livros'):
-                    break
         
+        os.system('cls' if os.name == 'nt' else 'clear')
+        # Verifica se existe pelo menos um livro e um membro registrado
+        if lista_livros and lista_membros:
+        
+            while True:
+                try:    
+                    id_membro = int(input('Informe o ID do membro qual está emprestando o livro:\n'))
+                    # Verifica se o ID digitado existe na lista do objeto Membro 
+                    if any(membro.id_membro == id_membro for membro in lista_membros):
+                        isbn_livro = int(input('\nQual o ISBN do livro que será emprestado?\n'))
+                        # Verifica se o ISBN digitado exista na lista do objeto Livro
+                        if any(livro.isbn == isbn_livro for livro in lista_livros):
+                            # Verifica se o livro está disponível ou não
+                            if any(livro == isbn_livro for livro in livros_disponiveis):
+                                livros_emprestados.append(isbn_livro)
+                                livros_disponiveis.remove(isbn_livro)
+                                print('\nO livro foi devolvido com sucesso.')
+                            else:
+                                print('\nLivro não está disponível para empréstimo! Solicite que retorne outro dia.')
+                                    
+                        else:
+                            print('\nO ISBN do livro não foi localizado no sistema.')
+                    else:
+                        print('\nO ID do membro não foi localizado no sistema.')
+                            
+                except ValueError:
+                    print('\nPor favor, insira um número inteiro.')
+                except:
+                    print('\nErro inesperado.')
+
+                finally:
+                    if not continuar('emprestando livros'):
+                        break
+                    
+        else:
+            print('Registre pelo menos um membro e um livro para executar essa função')
 
     # Função para devolver livro
     def devolver_livro():
-        while True:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            try:
-                id_membro = int(input('Informe o ID do membro qual está emprestando o livro:\n'))
-                # Verifica se o ID digitado existe na lista do objeto Membro 
-                if any(membro.id_membro == id_membro for membro in lista_membros):
-                    isbn_livro = int(input('Qual o ISBN do livro que será devolvido?\n'))
-                    # Verifica se o ISBN digitado exista na lista do objeto Livro
-                    if any(livro.isbn == isbn_livro for livro in lista_livros):
-                        # Verifica se o livro foi emprestado ou não
-                        if any(livro == isbn_livro for livro in livros_emprestados):
-                            print('O livro foi devolvido e agora está disponível para empréstimo.')
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if lista_livros and lista_membros:
+            while True:
+
+                # Verifica se existe pelo menos um livro e um membro registrado
+                    
+                try:
+                    id_membro = int(input('Informe o ID do membro qual está recebendo o livro:\n'))
+                    # Verifica se o ID digitado existe na lista do objeto Membro 
+                    if any(membro.id_membro == id_membro for membro in lista_membros):
+                        isbn_livro = int(input('\nQual o ISBN do livro que será devolvido?\n'))
+                        # Verifica se o ISBN digitado exista na lista do objeto Livro
+                        if any(livro.isbn == isbn_livro for livro in lista_livros):
+                            # Verifica se o livro foi emprestado ou não
+                            if any(livro == isbn_livro for livro in livros_emprestados):
+                                print('\nO livro foi devolvido com sucesso.')
+                                livros_disponiveis.append(isbn_livro)
+                                livros_emprestados.remove(isbn_livro)
+                            else:
+                                print('\nEste livro não foi empréstado até o momento.')
+
                         else:
-                            print('Este livro não foi empréstado até o momento.')
-
+                            print('\nO ISBN do livro não foi localizado no sistema.')
                     else:
-                        print('O ISBN do livro não foi localizado no sistema.')
-                else:
-                    print('O ID do membro não foi localizado no sistema.')
+                        print('\nO ID do membro não foi localizado no sistema.')
 
-            except ValueError:
-                print('Por favor, insira um número inteiro.')
-            except:
-                print('Erro inesperado.')
+                except ValueError:
+                    print('\nPor favor, insira um número inteiro.')
+                except:
+                    print('\nErro inesperado.')
 
-            finally:
-                if not continuar('emprestando livros'):
-                    break
+                finally:
+                    if not continuar('devolver outros'):
+                        break
+
+        else:
+            print('Registre pelo menos um membro e um livro para executar essa função')
+
+    def imprimir_livros_disponiveis():
+
+        # Verifica existe algum livro registrado
+        if lista_livros:    
+            # Verifica se existem livros disponíveis
+            if livros_disponiveis:
+                for livro in lista_livros:
+                    if any(livro_disponivel == livro.isbn for livro_disponivel in livros_disponiveis):
+                        print(f'''
+    __________________________________________\n
+        ISBN: {livro.isbn}
+        Título: {livro.titulo.capitalize()}
+        Autor: {livro.autor}''')
+            
+            else:
+                print('Não possuimos livros disponíveis no momento')
+        else:
+            print('Adicione pelo menos um livro antes de executar essa função.')
+                
+    def imprimir_livros_emprestados():
+        
+        if lista_livros:
+            if livros_emprestados:
+                for livro in lista_livros:
+                    if any(livro_emprestado == livro.isbn for livro_emprestado in livros_emprestados):
+                        print(f'''
+    __________________________________________\n
+        ISBN: {livro.isbn}
+        Título: {livro.titulo.capitalize()}
+        Autor: {livro.autor}''')
+                
+            else:
+                print('Todos os livros estão disponíveis no momento')
+        else:
+            print('Adicione pelo menos um livro antes de executar essa função.')
