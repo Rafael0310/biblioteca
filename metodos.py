@@ -1,10 +1,10 @@
-def continuar_registro(metodo, objeto):
+def continuar(metodo):
     while True:
         try:
 
             continuar = int(input(f'''
 __________________________________________\n
-    Deseja {metodo} um novo {objeto}?
+    Deseja continuar {metodo}?
 __________________________________________\n
                 1 - Sim
                 2 - Não

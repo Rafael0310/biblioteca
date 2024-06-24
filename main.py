@@ -36,7 +36,7 @@ ____________________________________\n''')
                 print('Encerrando...')
                 quit()
             case _:
-                os.system('cls')
+                os.system('cls' if os.name == 'nt' else 'clear')
                 print('Opção inválida! Tente novamente.')
         
     except  ValueError:
