@@ -1,0 +1,24 @@
+Sistema de Gestão de Biblioteca
+
+Tabelas
+
+Usuários: Cada usuário deve ter: ID, nome, email e data de cadastro.
+
+Livros: Cada livro deve ter: ID, título, autor, categoria e disponibilidade (sim/não).
+
+Empréstimos: Cada empréstimo deve registrar: ID do empréstimo, ID do usuário, ID do livro, data de empréstimo e data de devolução.
+
+
+Funcionalidades:
+Cadastrar usuários: Adicionar novos usuários ao sistema.
+
+Cadastrar livros: Adicionar novos livros ao acervo.
+
+Realizar empréstimos: Registrar o empréstimo de um livro a um usuário.
+
+Registrar devoluções: Atualizar o status do livro para disponível.
+
+Consultar dados:
+Listar todos os livros disponíveis.
+Listar os livros emprestados por um determinado usuário.
+Listar todos os usuários e o número de empréstimos realizados.
