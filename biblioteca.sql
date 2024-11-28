@@ -3,18 +3,18 @@ CREATE DATABASE biblioteca;
 USE biblioteca;
 
 CREATE TABLE usuarios(
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     dt_cadastro DATE NOT NULL
 );
 
 CREATE TABLE livros(
-	id INT PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(255) NOT NULL,
     autor VARCHAR(255) NOT NULL,
     categoria VARCHAR(255) NOT NULL,
-    disp BOOL
+    disp BOOL NOT NULL
 );
 
 CREATE TABLE emprestimo(
