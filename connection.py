@@ -6,5 +6,3 @@ conn = mysql.connector.connect(
     user='root',
     password='Iva@Mj#031015'
 )
-
-cursor = conn.cursor()

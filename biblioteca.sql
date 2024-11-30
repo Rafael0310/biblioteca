@@ -17,12 +17,12 @@ CREATE TABLE livros(
     disp BOOL NOT NULL
 );
 
-CREATE TABLE emprestimo(
-	id_emprestimo INT PRIMARY KEY,
+CREATE TABLE emprestimos(
+	id_emprestimo INT PRIMARY KEY AUTO_INCREMENT,
     id_usuario INT NOT NULL,
-    id_livros INT NOT NULL,
+    id_livro INT NOT NULL,
     data_emprestimo DATE NOT NULL,
-    data_devolucao DATE NOT NULL,
-	FOREIGN KEY (id_usuario) REFERENCES usuarios (id),
-    FOREIGN KEY (id_livros) REFERENCES livros(id)
+    data_devolucao DATE,
+	FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_livro) REFERENCES livros(id)
 );
